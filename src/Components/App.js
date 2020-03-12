@@ -4,11 +4,11 @@ import GlobalStyles from "../Styles/GlobalStyles";
 import Theme from "../Styles/Theme";
 import Router from "./Router";
 
-export default() => (
+export default () => (
   <ThemeProvider theme={Theme}>
-  <>
-    <GlobalStyles/>
-    <Router isLoggedIn={false}/>
-  </>
+    <>
+      <GlobalStyles />
+      <Router isLoggedIn={false} />
+    </>
   </ThemeProvider>
 );
