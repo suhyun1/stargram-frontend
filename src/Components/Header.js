@@ -20,6 +20,7 @@ const Header = styled.header`
   justify-content: center;
   align-items: center;
   padding: 25px 0px;
+  z-index: 2;
 `;
 
 const HeaderWrapper = styled.div`
@@ -28,7 +29,6 @@ const HeaderWrapper = styled.div`
   display: flex;
   justify-content: center;
 `;
-
 const HeaderColumn = styled.div`
   width: 33%;
   text-align: center;
@@ -41,7 +41,6 @@ const HeaderColumn = styled.div`
     text-align: right;
   }
 `;
-
 const SearchInput = styled(Input)`
   background-color: ${props => props.theme.bgColor};
   padding: 5px;
@@ -55,7 +54,6 @@ const SearchInput = styled(Input)`
     font-weight: 200;
   }
 `;
-
 const HeaderLink = styled(Link)`
   &:not(:last-child) {
     margin-right: 30px;

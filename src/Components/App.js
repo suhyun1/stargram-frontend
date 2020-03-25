@@ -19,7 +19,7 @@ const QUERY = gql`
 
 const Wrapper = styled.div`
   margin: 0 auto;
-  max-widht: ${props => props.theme.maxWidth};
+  max-width: ${props => props.theme.maxWidth};
   width: 100%;
 `;
 export default () => {
@@ -33,7 +33,7 @@ export default () => {
         <GlobalStyles />
         <Router>
           <>
-            <Header />
+            {isLoggedIn && <Header />}
             <Wrapper>
               <Routes isLoggedIn={isLoggedIn} />
               <Footer />
