@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react";
 import PropTypes from "prop-types";
 import useInput from "../../Hooks/useInput";
 import PostPresenter from "./PostPresenter";
+import { useMutation } from "react-apollo-hooks";
+import { TOGGLE_LIKE, ADD_COMMENT } from "./PostQueries";
 
 const PostContainer = ({
     id, 
@@ -17,7 +19,11 @@ const PostContainer = ({
         const [isLikedS, setIsLiked] = useState(isLiked);
         const [likeCountS, setLikeCount] = useState(likeCount);
         const [currentItem, setCurrentItem] = useState(0);
+        const [toggleLikeMutation] = useMutation(TOGGLE_LIKE, 
+          { variables: { postId: id} });
         const comment = useInput("");
+        const [addCommentMutation] = useMutation(ADD_COMMENT,
+          { variables: { postId: id, text: comment.value } });
         
         const slide = () => {
           const totalFiles = files.length;
@@ -27,24 +33,38 @@ const PostContainer = ({
             setTimeout(()=> setCurrentItem(currentItem+1), 2000);
           }
         };
+
         useEffect(() => {
           slide();
         }, [currentItem]);  
-        console.log(currentItem);
+        
+        const toggleLike = () => {
+          toggleLikeMutation();
+
+          if (isLikedS === true){
+            setIsLiked(false);
+            setLikeCount(likeCountS - 1);
+          }else{
+            setIsLiked(true);
+            setLikeCount(likeCountS + 1);
+          }
+        };
+
         return (
           <PostPresenter
             user={user}
             files={files}
+            likeCount={likeCountS}
             location={location}
             caption={caption}
-            likeCount={likeCountS}
             isLiked={isLikedS}
             comments={comments}
             createdAt={createdAt}
-            newComment={comments}
+            newComment={comment}
             setIsLiked={setIsLiked}
             setLikeCount={setLikeCount}
             currentItem={currentItem}
+            toggleLike={toggleLike}
           />
         );
 };
