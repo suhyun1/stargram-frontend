@@ -2,8 +2,9 @@ import React, {useState, useEffect} from "react";
 import PropTypes from "prop-types";
 import useInput from "../../Hooks/useInput";
 import PostPresenter from "./PostPresenter";
-import { useMutation } from "react-apollo-hooks";
+import { useMutation, useQuery } from "react-apollo-hooks";
 import { TOGGLE_LIKE, ADD_COMMENT } from "./PostQueries";
+import { toast } from "react-toastify";
 
 const PostContainer = ({
     id, 
@@ -19,9 +20,11 @@ const PostContainer = ({
         const [isLikedS, setIsLiked] = useState(isLiked);
         const [likeCountS, setLikeCount] = useState(likeCount);
         const [currentItem, setCurrentItem] = useState(0);
-        const [toggleLikeMutation] = useMutation(TOGGLE_LIKE, 
-          { variables: { postId: id} });
+        const [selfComments, setSelfComments] = useState([]);
         const comment = useInput("");
+
+        const [toggleLikeMutation] = useMutation(TOGGLE_LIKE,
+          { variables: { postId: id } });
         const [addCommentMutation] = useMutation(ADD_COMMENT,
           { variables: { postId: id, text: comment.value } });
         
@@ -34,6 +37,24 @@ const PostContainer = ({
           }
         };
 
+        //엔터누르면 comment 제출
+        const onKeyPress = async(event) => {  //comment가 DB에 저장될때까지 기다림
+          const {which} = event;
+          
+          if (which === 13) {//enter : 13
+            event.preventDefault();
+            try{
+              const {
+                data: {addComment}
+              } = await addCommentMutation();
+              setSelfComments([...selfComments, addComment]);
+              comment.setValue("");
+            }catch{
+              toast.error("Can't send comment");
+            }
+
+          }
+        };
         useEffect(() => {
           slide();
         }, [currentItem]);  
@@ -65,6 +86,8 @@ const PostContainer = ({
             setLikeCount={setLikeCount}
             currentItem={currentItem}
             toggleLike={toggleLike}
+            onKeyPress={onKeyPress}
+            selfComments={selfComments}
           />
         );
 };
