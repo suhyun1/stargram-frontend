@@ -71,6 +71,16 @@ const PostContainer = ({
           }
         };
 
+        //datetime parsing
+        const datetime = new Date(createdAt);
+        const nowDatetime = new Date();
+        let parsedDate = "";
+        if(datetime.getFullYear() === nowDatetime.getFullYear()){ //올해면 월,일만 출력 
+          parsedDate = `${ datetime.getMonth()+1 }.${ datetime.getDate()}`;
+        } else {
+          parsedDate = `${datetime.getFullYear()}.${datetime.getMonth()+1}.${datetime.getDate()}`;
+        }
+
         return (
           <PostPresenter
             user={user}
@@ -80,7 +90,7 @@ const PostContainer = ({
             caption={caption}
             isLiked={isLikedS}
             comments={comments}
-            createdAt={createdAt}
+            createdAt={parsedDate}
             newComment={comment}
             setIsLiked={setIsLiked}
             setLikeCount={setLikeCount}
