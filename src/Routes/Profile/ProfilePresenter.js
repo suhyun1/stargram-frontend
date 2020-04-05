@@ -23,7 +23,7 @@ const Header = styled.header`
 `;
 
 const HeaderColumn = styled.div`
-
+    width: 100%;
 `;
 
 const UsernameRow = styled.div`
@@ -35,6 +35,15 @@ const Username = styled.span`
     font-size: 26px;
     display: block;
     margin-right: 20px;
+`;
+
+const Buttons = styled.span`
+    display: flex;
+    {
+        button{
+            margin: 0px 3px;
+        }
+    }
 `;
 
 const Counts = styled.ul`
@@ -98,7 +107,10 @@ export default ({ loading, data, logOut})=> {
                         <UsernameRow>
                             <Username>{username}</Username>
                             {isSelf ? (
-                                <Button onClick={logOut} text="Log Out" /> 
+                                <Buttons>
+                                    <Button onClick={logOut} text="Edit Profile" /> 
+                                    <Button onClick={logOut} text="Log Out" /> 
+                                </Buttons>
                             ): (
                                 <FollowButton id={id} isFollowing={isFollowing} />
                             )}

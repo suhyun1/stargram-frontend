@@ -40,6 +40,7 @@ const Form = styled(Box)`
             }
         }
         button{
+            width: 100%;
             margin-top: 10px;
         }
     }
