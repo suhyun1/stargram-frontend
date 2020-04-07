@@ -7,6 +7,7 @@ import FatText from "../../Components/FatText";
 import FollowButton from "../../Components/FollowButton";
 import SquarePost from "../../Components/SquarePost";
 import Button from "../../Components/Button";
+import { Link } from "react-router-dom";
 
 
 const Wrapper = styled.div`
@@ -80,6 +81,7 @@ export default ({ loading, data, logOut})=> {
             </Wrapper>
         );
     } else if(!loading && data && data.seeUserProfile) {
+        
         const { seeUserProfile: {
             id,
             avatar,
@@ -93,55 +95,58 @@ export default ({ loading, data, logOut})=> {
             postsCount,
             posts
         } } = data;
+        console.log(isSelf);
 
         return (
-            <Wrapper>
-                <Helmet>
-                    <title>{username} | Stargram</title>
-                </Helmet>
-                <Header>
-                    <HeaderColumn>
-                        <Avatar size="lg" url={avatar} />
-                    </HeaderColumn>
-                    <HeaderColumn>
-                        <UsernameRow>
-                            <Username>{username}</Username>
-                            {isSelf ? (
-                                <Buttons>
-                                    <Button onClick={logOut} text="Edit Profile" /> 
-                                    <Button onClick={logOut} text="Log Out" /> 
-                                </Buttons>
-                            ): (
-                                <FollowButton id={id} isFollowing={isFollowing} />
-                            )}
-                        </UsernameRow>
-                        <Counts>
-                            <Count>
-                                <FatText text={String(postsCount)}/> posts
-                            </Count>
-                            <Count>
-                                <FatText text={String(followersCount)} /> followers
-                            </Count>
-                            <Count>
-                                <FatText text={String(followingCount)} /> followings
-                            </Count>
-                        </Counts>
-                        <FullName text={fullName}/>
-                        <Bio>{bio}</Bio>
-                    </HeaderColumn>
-                </Header>
-                <Posts>
-                    {posts && posts.map(post => 
-                        <SquarePost
-                            key={post.id}
-                            likeCount={post.likeCount}
-                            commentCount={post.commentCount}
-                            file={post.files[0]}
-                        />
-                    )}
-                
-                </Posts>
-            </Wrapper>
+          <Wrapper>
+            <Helmet>
+              <title>{username} | Stargram</title>
+            </Helmet>
+            <Header>
+              <HeaderColumn>
+                <Avatar size="lg" url={avatar} />
+              </HeaderColumn>
+              <HeaderColumn>
+                <UsernameRow>
+                  <Username>{username}</Username>
+                  {isSelf ? (
+                    <Buttons>
+                      <Link to="/editProfile">
+                        <Button text="Edit Profile" />
+                      </Link>
+                      <Button onClick={logOut} text="Log Out" />
+                    </Buttons>
+                  ) : (
+                    <FollowButton id={id} isFollowing={isFollowing} />
+                  )}
+                </UsernameRow>
+                <Counts>
+                  <Count>
+                    <FatText text={String(postsCount)} /> posts
+                  </Count>
+                  <Count>
+                    <FatText text={String(followersCount)} /> followers
+                  </Count>
+                  <Count>
+                    <FatText text={String(followingCount)} /> followings
+                  </Count>
+                </Counts>
+                <FullName text={fullName} />
+                <Bio>{bio}</Bio>
+              </HeaderColumn>
+            </Header>
+            <Posts>
+              {posts &&
+                posts.map((post) => (
+                  <SquarePost
+                    key={post.id}
+                    likeCount={post.likeCount}
+                    commentCount={post.commentCount}
+                    file={post.files[0]}
+                  />
+                ))}
+            </Posts>
+          </Wrapper>
         );
     }
     return null;
