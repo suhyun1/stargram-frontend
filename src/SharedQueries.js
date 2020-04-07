@@ -4,6 +4,10 @@ export const ME = gql`
   {
     me {
       username
+      firstName
+      lastName
+      bio
+      email
     }
   }
 `;
