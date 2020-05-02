@@ -81,7 +81,7 @@ export default ({ loading, data, logOut})=> {
             </Wrapper>
         );
     } else if(!loading && data && data.seeUserProfile) {
-        
+
         const { seeUserProfile: {
             id,
             avatar,
@@ -95,7 +95,12 @@ export default ({ loading, data, logOut})=> {
             postsCount,
             posts
         } } = data;
-        console.log(isSelf);
+
+        //post 날짜 순 정렬
+        const cmpDate = (a, b) =>{
+          return a.createdAt > b.createdAt ? -1 : a.createdAt < b.createdAt ? 1 : 0;
+        };
+        posts.sort(cmpDate);  
 
         return (
           <Wrapper>

@@ -23,6 +23,7 @@ const GET_USER = gql`
                 }
                 likeCount
                 commentCount
+                createdAt
             }
             postsCount
         }
