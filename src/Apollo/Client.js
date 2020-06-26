@@ -1,6 +1,6 @@
 import ApolloClient from "apollo-boost";
 import { defaults, resolvers } from "./LocalState";
-
+console.log(process.env.NODE_ENV);
 export default new ApolloClient({
   uri:
     process.env.NODE_ENV === "development"
