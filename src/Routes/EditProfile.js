@@ -80,7 +80,6 @@ export default () => {
     const firstName = useInput("");
     const lastName = useInput("");
     const bio = useInput("");
-    const email = useInput("");
 
     useEffect(() => {
       if (data && data.me) {
@@ -88,18 +87,16 @@ export default () => {
         firstName.setValue(data.me.firstName);
         lastName.setValue(data.me.lastName);
         bio.setValue(data.me.bio);
-        email.setValue(data.me.email);
       }
     }, [data]);
 
     const [editUserMutation] = useMutation(EDIT_USER, {
       variables: {
-        email: email.value,
+        email: data.me.email,
         username: username.value,
         firstName: firstName.value,
         lastName: lastName.value,
         bio: bio.value
-
       },
     });
 
@@ -111,18 +108,15 @@ export default () => {
           const {
             data: { editUser },
           } = await editUserMutation();
-          console.log(editUser);
           if (!editUser) {
             toast.error("Can't change");
           } else {
             toast.success("Success!");
-            setTimeout(() => { window.location = "/" }, 500);
-
+            window.location = "/";
           }
         } catch (e) {
           toast.error(e.message);
         }
-
 
     };
 
@@ -143,13 +137,6 @@ export default () => {
                 value={data.me.username}
                 required={true}
                 {...username}
-              />
-              Email
-              <Input
-                value={data.me.email}
-                required={true}
-                {...email}
-                type="email"
               />
               First Name
               <Input
