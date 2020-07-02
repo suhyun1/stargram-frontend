@@ -81,7 +81,6 @@ export default ({ loading, data, logOut})=> {
             </Wrapper>
         );
     } else if(!loading && data && data.seeUserProfile) {
-
         const { seeUserProfile: {
             id,
             avatar,
@@ -101,7 +100,6 @@ export default ({ loading, data, logOut})=> {
           return a.createdAt > b.createdAt ? -1 : a.createdAt < b.createdAt ? 1 : 0;
         };
         posts.sort(cmpDate);  
-
         return (
           <Wrapper>
             <Helmet>
@@ -145,6 +143,7 @@ export default ({ loading, data, logOut})=> {
                 posts.map((post) => (
                   <SquarePost
                     key={post.id}
+                    id={post.id}
                     likeCount={post.likeCount}
                     commentCount={post.commentCount}
                     file={post.files[0]}

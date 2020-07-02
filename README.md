@@ -8,6 +8,7 @@ Instagram clone frontend
 - [x] Search Post&User
 - [x] User profile (+Log Out)
 - [x] Edit profile
-- [ ] Show full photo
+- [x] Show full photo
 - [ ] Upload post
-- [ ] Show follower&following list 
+- [ ] Show follower&following list
+- [ ] Search by hashtag

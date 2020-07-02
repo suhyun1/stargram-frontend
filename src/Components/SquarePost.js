@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { HeartFull, CommentFull } from "./Icons";
+import Modal from "./PhotoModal";
 
 const Overlay = styled.div`
     background-color: rgba(0, 0, 0, 0.6);
@@ -42,21 +43,43 @@ const NumberText = styled.div`
     font-size: 16px;
 `;
 
-const SquarePost = ({likeCount, commentCount, file}) => (
-    <Container bg={file.url}>
-        <Overlay>
-            <Number>
-                <HeartFull/>
-                <NumberText>{likeCount} </NumberText>
-            </Number>
-            <Number>
-                <CommentFull />
-                <NumberText>{commentCount} </NumberText>
-            </Number>
-        </Overlay>
-    </Container>
+const SquarePost = ({id, likeCount, commentCount, file}) => {
+    const [modalVisible, setModalVisible] = useState(false);
+    const openModal = () => {
+        setModalVisible(true)
+    };
+    const closeModal = () => {
+        setModalVisible(false)
+    };
 
-);
+    return (
+        <>
+        <Container onClick={openModal} bg={file.url}>
+            <Overlay>
+                <Number>
+                    <HeartFull />
+                    <NumberText>{likeCount} </NumberText>
+                </Number>
+                <Number>
+                    <CommentFull />
+                    <NumberText>{commentCount} </NumberText>
+                </Number>
+            </Overlay>
+        </Container>
+        {
+            modalVisible && 
+            <Modal
+                visible={modalVisible}
+                onClose={closeModal}
+                id= {id}
+                >
+            </Modal>
+        }
+        </>
+    );
+    
+
+};
 
 SquarePost.propTypes= {
     likeCount: PropTypes.number.isRequired,
