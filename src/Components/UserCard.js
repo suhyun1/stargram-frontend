@@ -39,8 +39,8 @@ const UserCard = ({id, username, isFollowing, url, isSelf}) => (
 UserCard.propTypes = {
     id: PropTypes.string.isRequired,
     username: PropTypes.string.isRequired,
-    isFollowing: PropTypes.string.isRequired,
+    isFollowing: PropTypes.bool.isRequired,
     url: PropTypes.string.isRequired,
-    isSelf: PropTypes.string.isRequired
+    isSelf: PropTypes.bool.isRequired
 }
 export default UserCard;
