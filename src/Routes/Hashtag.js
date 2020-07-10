@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { gql } from "apollo-boost";
-import withRouter from "react-router-dom/withRouter";
+import { withRouter } from "react-router-dom";
 import { useQuery } from "react-apollo-hooks";
 import { Helmet } from "react-helmet";
 import Loader from "../Components/Loader";
@@ -57,14 +57,6 @@ const TagName = styled.span`
   margin-right: 20px;
 `;
 
-const Buttons = styled.span`
-  display: flex;
-   {
-    button {
-      margin: 0px 3px;
-    }
-  }
-`;
 
 const Counts = styled.ul`
   display: flex;
@@ -76,12 +68,6 @@ const Count = styled.li`
   &:not(:last-child) {
     margin-right: 10px;
   }
-`;
-const FullName = styled(FatText)`
-  font-size: 16px;
-`;
-const Bio = styled.p`
-  margin: 10px 0px;
 `;
 
 const Posts = styled.div`

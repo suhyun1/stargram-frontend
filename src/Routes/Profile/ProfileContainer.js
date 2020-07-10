@@ -1,7 +1,7 @@
 import React from "react";
 import { gql } from "apollo-boost";
 import { useQuery, useMutation } from "react-apollo-hooks";
-import withRouter from "react-router-dom/withRouter";
+import { withRouter } from "react-router-dom";
 import ProfilePresenter from "./ProfilePresenter";
 
 const GET_USER = gql`
