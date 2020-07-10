@@ -7,11 +7,13 @@ import Explore from "../Routes/Explore";
 import Search from "../Routes/Search";
 import Profile from "../Routes/Profile";
 import EditProfile from "../Routes/EditProfile";
+import Hashtag from "../Routes/Hashtag";
 
 const LoggedInRoutes = () => (
   <Switch>
-    <Route exact path="/" component={Feed}></Route>
+    <Route exact path="/" component={Feed} />
     <Route path="/explore" component={Explore} />
+    <Route path="/tags/:tag" component={Hashtag} />
     <Route path="/search" component={Search} />
     <Route path="/editProfile" component={EditProfile} />
     <Route path="/:username" component={Profile} />
