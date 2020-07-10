@@ -1,10 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-import FatText from "../FatText";
 import TextareaAutosize from "react-autosize-textarea";
+import FatText from "../FatText";
 import Avatar from "../Avatar";
 import { HeartEmpty, HeartFull, Comment as CommentIcon } from "../Icons";
-import { Link } from "react-router-dom";
+import HashtagLink from "../HashtagLink";
 
 const Post = styled.div`
   ${props => props.theme.whiteBox};
@@ -154,8 +155,9 @@ export default ({
         </Button>
       </Buttons>
       <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
-      <Caption>{caption}</Caption>
-
+      <Caption>
+        <HashtagLink text={caption} />
+      </Caption>
       {comments && (
           <Comments>
             {comments.map(comment => (
