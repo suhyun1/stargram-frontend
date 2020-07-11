@@ -10,6 +10,6 @@ Instagram clone frontend
 - [x] Edit profile
 - [x] Show full photo (Modal)
 - [x] Show follower&following list
-- [ ] Search by hashtag
-- [ ] Explore(특정 시간 동안 좋아요 많은 post 보여주기)
-- [ ] Upload post(App에서만 구현할 듯)
+- [x] Search by hashtag
+- [ ] Explore(특정 시간 동안 좋아요 많은 post, tag 보여주기)
+- Upload post는 App에서만 구현하기로 함
