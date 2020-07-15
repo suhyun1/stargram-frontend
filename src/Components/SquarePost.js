@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { HeartFull, CommentFull } from "./Icons";
-import Modal from "./PhotoModal";
 
 const Overlay = styled.div`
     background-color: rgba(0, 0, 0, 0.6);
@@ -44,17 +44,10 @@ const NumberText = styled.div`
 `;
 
 const SquarePost = ({id, likeCount, commentCount, file}) => {
-    const [modalVisible, setModalVisible] = useState(false);
-    const openModal = () => {
-        setModalVisible(true)
-    };
-    const closeModal = () => {
-        setModalVisible(false)
-    };
 
     return (
-        <>
-        <Container onClick={openModal} bg={file.url}>
+        <Container bg={file.url}>
+            <Link to={{ pathname: `/post/${id}` }}>
             <Overlay>
                 <Number>
                     <HeartFull />
@@ -65,17 +58,8 @@ const SquarePost = ({id, likeCount, commentCount, file}) => {
                     <NumberText>{commentCount} </NumberText>
                 </Number>
             </Overlay>
+            </Link>
         </Container>
-        {
-            modalVisible && 
-            <Modal
-                visible={modalVisible}
-                onClose={closeModal}
-                id= {id}
-                >
-            </Modal>
-        }
-        </>
     );
     
 

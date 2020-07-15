@@ -8,6 +8,7 @@ import Search from "../Routes/Search";
 import Profile from "../Routes/Profile";
 import EditProfile from "../Routes/EditProfile";
 import Hashtag from "../Routes/Hashtag";
+import FullPhoto from "../Routes/FullPhoto";
 
 const LoggedInRoutes = () => (
   <Switch>
@@ -16,6 +17,7 @@ const LoggedInRoutes = () => (
     <Route path="/tags/:tag" component={Hashtag} />
     <Route path="/search" component={Search} />
     <Route path="/editProfile" component={EditProfile} />
+    <Route path="/post/:postId" component={FullPhoto} />
     <Route path="/:username" component={Profile} />
     <Redirect from="*" to="/" />
   </Switch>
